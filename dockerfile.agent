@@ -1,0 +1,11 @@
+# agent/Dockerfile
+FROM ubuntu:22.04
+
+RUN apt-get update && \
+    apt-get install -y openjdk-17-jdk git curl && \
+    useradd -m -d /home/jenkins -s /bin/bash jenkins
+
+USER jenkins
+WORKDIR /home/jenkins
+
+# Jenkins agent JAR will be downloaded by Kubernetes plugin automatically

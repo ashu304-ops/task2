@@ -1,0 +1,23 @@
+# jenkins-agent-jnlp.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jenkins-agent-jnlp
+  labels:
+    jenkins: agent
+spec:
+  containers:
+  - name: jnlp
+    image: ashu304/jenkins-agent-jnlp:manual
+    imagePullPolicy: Always
+    args:
+      - ${JENKINS_SECRET}
+      - ${JENKINS_NAME}
+    env:
+    - name: JENKINS_URL
+      value: http://192.168.49.2:8080
+    resources:
+      limits:
+        memory: "512Mi"
+        cpu: "500m"
+    tty: true
